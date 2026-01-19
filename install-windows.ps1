@@ -4,7 +4,8 @@
 $ErrorActionPreference = "Stop"
 
 # Colors
-function Write-ColorOutput($ForegroundColor) {
+function Write-ColorOutput {
+    param($ForegroundColor)
     $fc = $host.UI.RawUI.ForegroundColor
     $host.UI.RawUI.ForegroundColor = $ForegroundColor
     if ($args) {
@@ -13,11 +14,9 @@ function Write-ColorOutput($ForegroundColor) {
     $host.UI.RawUI.ForegroundColor = $fc
 }
 
-Write-ColorOutput Cyan @"
-╔════════════════════════════════════════════════════════════╗
-║              Dockerin Installation                       ║
-╚════════════════════════════════════════════════════════════╝
-"@
+Write-ColorOutput Cyan "╔════════════════════════════════════════════════════════════╗"
+Write-ColorOutput Cyan "║              Dockerin Installation                       ║"
+Write-ColorOutput Cyan "╚════════════════════════════════════════════════════════════╝"
 Write-Output ""
 
 # Configuration
@@ -61,7 +60,8 @@ try {
     
     if ($LASTEXITCODE -eq 0) {
         Write-ColorOutput Green "✓ Installation complete!"
-    } else {
+    }
+    else {
         Write-ColorOutput Red "Installation failed with exit code: $LASTEXITCODE"
         exit 1
     }
@@ -74,7 +74,8 @@ catch {
     if (Get-Command curl -ErrorAction SilentlyContinue) {
         Write-ColorOutput Blue "Using curl to download..."
         curl -s $installShUrl | bash
-    } else {
+    }
+    else {
         Write-ColorOutput Red "Failed to download installer. Please check your internet connection."
         exit 1
     }
