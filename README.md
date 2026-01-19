@@ -42,12 +42,19 @@ bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install
 
 **Windows PowerShell:**
 ```powershell
-# Download dan jalankan installer PowerShell
+# Opsi 1: Installer PowerShell (Recommended)
 Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1
 .\install.ps1
 
-# Atau langsung (one-liner)
+# Opsi 2: Alternative installer (jika opsi 1 gagal)
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install-windows.ps1' -OutFile install-windows.ps1
+.\install-windows.ps1
+
+# Opsi 3: One-liner (install.ps1)
 powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1; .\install.ps1"
+
+# Opsi 4: One-liner (install-windows.ps1 - lebih reliable)
+powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install-windows.ps1' -OutFile install-windows.ps1; .\install-windows.ps1"
 ```
 
 **Windows (Alternatif dengan Git Bash):**
