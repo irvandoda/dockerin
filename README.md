@@ -35,7 +35,25 @@
 
 **Langkah 1**: Install Dockerin (satu kali saja)
 
+**Linux/Mac/Git Bash:**
 ```bash
+bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh)
+```
+
+**Windows PowerShell:**
+```powershell
+# Download dan jalankan installer PowerShell
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1
+.\install.ps1
+
+# Atau langsung (one-liner)
+powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1; .\install.ps1"
+```
+
+**Windows (Alternatif dengan Git Bash):**
+```bash
+# Install Git Bash terlebih dahulu: https://git-scm.com/downloads
+# Kemudian gunakan command seperti Linux/Mac
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh)
 ```
 
