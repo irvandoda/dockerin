@@ -1,0 +1,33 @@
+# Full-stack Preset Configuration
+# Complete Laravel setup with assets
+
+preset: fullstack
+description: Complete Laravel full-stack setup with assets
+
+services:
+  - php
+  - nginx
+  - db
+  - redis
+  - mailhog
+  - queue
+
+features:
+  api_only: false
+  frontend_assets: true
+  spa_mode: false
+  hot_reload: true
+  queue_worker: true
+  mail_catcher: true
+  xdebug: true
+  db_admin: adminer
+
+nginx_config:
+  spa_mode: false
+  api_proxy: false
+  static_assets: true
+  cache: true
+
+php_config:
+  opcache_enabled: true
+  xdebug: true

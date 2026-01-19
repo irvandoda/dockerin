@@ -1,0 +1,26 @@
+# Supervisor configuration for Laravel Queue Workers
+# This file should be placed in /etc/supervisor/conf.d/queue-worker.conf inside container
+
+[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=www-data
+numprocs=2
+redirect_stderr=true
+stdout_logfile=/var/www/html/storage/logs/worker.log
+stopwaitsecs=3600
+
+[program:laravel-scheduler]
+process_name=%(program_name)s
+command=php /var/www/html/artisan schedule:work
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=www-data
+redirect_stderr=true
+stdout_logfile=/var/www/html/storage/logs/scheduler.log

@@ -1,0 +1,30 @@
+# Microservice Preset Configuration
+# Multiple Laravel services
+
+preset: microservice
+description: Multiple Laravel services setup
+
+services:
+  - php
+  - nginx
+  - db
+  - redis
+  - queue
+
+features:
+  api_only: true
+  frontend_assets: false
+  microservice_mode: true
+  queue_worker: true
+  rate_limiting: true
+  service_mesh: false
+
+nginx_config:
+  api_mode: true
+  cors_enabled: true
+  rate_limit: true
+  service_routing: true
+
+php_config:
+  opcache_enabled: true
+  xdebug: false

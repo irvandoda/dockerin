@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dockerin - Laravel Docker Setup CLI</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+        }
+        h1 {
+            color: #4ec9b0;
+            margin-bottom: 20px;
+        }
+        .command {
+            background: #252526;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #4ec9b0;
+        }
+        .loading {
+            color: #4ec9b0;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dockerin</h1>
+        <p>Laravel Docker Setup CLI</p>
+        <div class="loading" id="loading">Loading...</div>
+        <div id="content" style="display: none;">
+            <div class="command">
+                <p>Redirecting to bootstrap script...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get command from URL path
+        const path = window.location.pathname;
+        const command = path.split('/').pop() || 'menu';
+        
+        // Map commands
+        const commandMap = {
+            'start': 'menu',
+            'menu': 'menu',
+            'dev-tools': 'dev-tools',
+            'tutorial': 'tutorial',
+            'install': 'install'
+        };
+        
+        const mappedCommand = commandMap[command] || 'menu';
+        const baseUrl = 'https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh';
+        
+        // Redirect to bootstrap script
+        const script = document.createElement('script');
+        script.textContent = `
+            (function() {
+                const command = '${mappedCommand}';
+                const script = document.createElement('script');
+                script.src = '${baseUrl}';
+                script.onload = function() {
+                    // Script loaded, but we need to execute it via bash
+                    // Since we can't execute bash directly, we'll redirect
+                    window.location.href = 'data:text/plain;base64,' + btoa('bash <(curl -s ${baseUrl}) ' + command);
+                };
+                document.head.appendChild(script);
+            })();
+        `;
+        
+        // For GitHub Pages, we'll create a redirect
+        document.getElementById('loading').textContent = 'Redirecting...';
+        
+        // Create a data URI that will execute the command
+        // Note: This is a workaround - actual execution should be done via curl | bash
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            
+            // Show command to user
+            const commandText = `curl -sL ${baseUrl} | bash -s ${mappedCommand}`;
+            document.getElementById('content').innerHTML = `
+                <div class="command">
+                    <p><strong>Run this command in your terminal:</strong></p>
+                    <code style="color: #4ec9b0; display: block; margin: 10px 0; padding: 10px; background: #1e1e1e; border-radius: 3px;">${commandText}</code>
+                    <p style="margin-top: 20px;">Or use the direct GitHub Pages URL:</p>
+                    <code style="color: #4ec9b0; display: block; margin: 10px 0; padding: 10px; background: #1e1e1e; border-radius: 3px;">bash <(curl -s ${baseUrl}) ${mappedCommand}</code>
+                </div>
+            `;
+        }, 1000);
+    </script>
+</body>
+</html>

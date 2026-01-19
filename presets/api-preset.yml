@@ -1,0 +1,26 @@
+# API Preset Configuration
+# Laravel API-only setup (no frontend assets)
+
+preset: api
+description: Laravel API-only setup without frontend assets
+
+services:
+  - php
+  - nginx
+  - db
+  - redis
+
+features:
+  api_only: true
+  frontend_assets: false
+  queue_worker: true
+  rate_limiting: true
+
+nginx_config:
+  api_mode: true
+  cors_enabled: true
+  rate_limit: true
+
+php_config:
+  opcache_enabled: true
+  xdebug: false

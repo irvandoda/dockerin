@@ -1,0 +1,27 @@
+# SPA Preset Configuration
+# Laravel + SPA Frontend (Vue/React)
+
+preset: spa
+description: Laravel with SPA frontend (Vue/React)
+
+services:
+  - php
+  - nginx
+  - db
+  - redis
+
+features:
+  api_only: false
+  frontend_assets: true
+  spa_mode: true
+  hot_reload: true
+  queue_worker: true
+
+nginx_config:
+  spa_mode: true
+  api_proxy: true
+  static_assets: true
+
+php_config:
+  opcache_enabled: true
+  xdebug: true
