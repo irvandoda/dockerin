@@ -91,6 +91,7 @@ curl -sL https://raw.githubusercontent.com/irvandoda/dockerin/main/tutorial.sh |
 
 #### Opsi 3: Remote Execution (Tanpa Install)
 
+**Linux/Mac/Git Bash:**
 ```bash
 # Run menu.sh langsung dari GitHub
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) menu
@@ -100,6 +101,31 @@ bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstr
 
 # Run tutorial.sh
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) tutorial
+```
+
+**Windows PowerShell:**
+```powershell
+# Run menu menggunakan PowerShell
+powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.ps1' -OutFile bootstrap.ps1; .\bootstrap.ps1 menu"
+
+# Atau lebih sederhana (jika sudah download bootstrap.ps1)
+.\bootstrap.ps1 menu
+```
+
+**Windows CMD:**
+```cmd
+# Run menu menggunakan CMD (requires Git Bash or WSL)
+bootstrap.bat menu
+
+# Atau langsung dengan curl dan bash
+curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/menu.sh | bash
+```
+
+**Alternatif untuk Windows (Recommended):**
+```bash
+# Install Git Bash terlebih dahulu: https://git-scm.com/downloads
+# Kemudian gunakan command seperti Linux/Mac
+bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) menu
 ```
 
 #### Opsi 4: Clone Repository
@@ -585,6 +611,59 @@ dockerin dev-tools health
 
 ---
 
+## 🪟 Windows Users
+
+### Instalasi Git Bash (Recommended)
+
+Untuk pengalaman terbaik di Windows, install Git Bash:
+
+1. Download dari: https://git-scm.com/downloads
+2. Install dengan default settings
+3. Gunakan Git Bash terminal
+4. Jalankan command seperti di Linux/Mac
+
+### Alternatif: PowerShell
+
+Jika menggunakan PowerShell, gunakan script PowerShell:
+
+```powershell
+# Download dan run bootstrap.ps1
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.ps1' -OutFile bootstrap.ps1
+.\bootstrap.ps1 menu
+```
+
+### Alternatif: WSL2
+
+Install WSL2 untuk pengalaman Linux di Windows:
+
+```powershell
+# Install WSL2
+wsl --install
+
+# Setelah install, gunakan WSL terminal
+wsl
+
+# Kemudian jalankan command seperti Linux
+bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) menu
+```
+
+### Error: `<` operator is reserved
+
+Jika mendapat error ini di PowerShell:
+```
+The '<' operator is reserved for future use.
+```
+
+**Solusi:**
+1. Gunakan Git Bash (recommended)
+2. Atau gunakan PowerShell script: `.\bootstrap.ps1 menu`
+3. Atau gunakan command alternatif:
+   ```powershell
+   curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/menu.sh | bash
+   ```
+
+---
+
 ## 🔍 Troubleshooting
 
 ### Port Already in Use
@@ -727,9 +806,13 @@ dockerin dev-tools restart redis
 
 ### Platform Support
 
-- ✅ **Linux**: Full support
-- ✅ **macOS**: Full support
-- ✅ **Windows**: Support via Git Bash atau WSL2
+- ✅ **Linux**: Full support (native bash)
+- ✅ **macOS**: Full support (native bash)
+- ✅ **Windows**: 
+  - ✅ **Git Bash**: Full support (recommended)
+  - ✅ **WSL2**: Full support
+  - ✅ **PowerShell**: Support via `bootstrap.ps1`
+  - ✅ **CMD**: Support via `bootstrap.bat` (requires Git Bash/WSL)
 
 ---
 
