@@ -2,7 +2,8 @@
 # Install dockerin locally for easy access
 
 # Colors
-function Write-ColorOutput($ForegroundColor) {
+function Write-ColorOutput {
+    param($ForegroundColor)
     $fc = $host.UI.RawUI.ForegroundColor
     $host.UI.RawUI.ForegroundColor = $ForegroundColor
     if ($args) {
@@ -19,11 +20,9 @@ $BASE_URL = "https://raw.githubusercontent.com/$GITHUB_REPO/$GITHUB_BRANCH"
 
 # Print header
 function Print-Header {
-    Write-ColorOutput Cyan @"
-╔════════════════════════════════════════════════════════════╗
-║              Dockerin Installation                       ║
-╚════════════════════════════════════════════════════════════╝
-"@
+    Write-ColorOutput Cyan "╔════════════════════════════════════════════════════════════╗"
+    Write-ColorOutput Cyan "║              Dockerin Installation                       ║"
+    Write-ColorOutput Cyan "╚════════════════════════════════════════════════════════════╝"
     Write-Output ""
 }
 
@@ -70,6 +69,11 @@ function Get-FileFromGitHub {
     catch {
         Write-ColorOutput Red "Error downloading $FilePath`: $($_.Exception.Message)"
         return $false
+    }
+    finally {
+        if ($webClient) {
+            $webClient.Dispose()
+        }
     }
 }
 
@@ -231,4 +235,5 @@ function Main {
     Write-Output ""
 }
 
+# Run main
 Main
