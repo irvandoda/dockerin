@@ -35,7 +35,25 @@
 
 **Langkah 1**: Install Dockerin (satu kali saja)
 
+**Linux/Mac/Git Bash:**
 ```bash
+bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh)
+```
+
+**Windows PowerShell:**
+```powershell
+# Download dan jalankan installer PowerShell
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1
+.\install.ps1
+
+# Atau langsung (one-liner)
+powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1; .\install.ps1"
+```
+
+**Windows (Alternatif dengan Git Bash):**
+```bash
+# Install Git Bash terlebih dahulu: https://git-scm.com/downloads
+# Kemudian gunakan command seperti Linux/Mac
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh)
 ```
 
@@ -91,6 +109,7 @@ curl -sL https://raw.githubusercontent.com/irvandoda/dockerin/main/tutorial.sh |
 
 #### Opsi 3: Remote Execution (Tanpa Install)
 
+**Linux/Mac/Git Bash:**
 ```bash
 # Run menu.sh langsung dari GitHub
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) menu
@@ -100,6 +119,22 @@ bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstr
 
 # Run tutorial.sh
 bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) tutorial
+```
+
+**Windows PowerShell:**
+```powershell
+# Gunakan curl dengan pipe ke bash (requires Git Bash or WSL)
+curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/menu.sh | bash
+
+# Atau install terlebih dahulu, kemudian gunakan
+dockerin start
+```
+
+**Windows (Recommended - Install Git Bash):**
+```bash
+# Install Git Bash: https://git-scm.com/downloads
+# Kemudian gunakan command seperti Linux/Mac
+bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/bootstrap.sh) menu
 ```
 
 #### Opsi 4: Clone Repository
@@ -582,6 +617,59 @@ dockerin db-tools migrate
 # 8. Check health
 dockerin dev-tools health
 ```
+
+---
+
+## 🪟 Windows Users
+
+### Error: `<` operator is reserved
+
+Jika mendapat error ini di PowerShell:
+```
+The '<' operator is reserved for future use.
+```
+
+**Solusi:**
+
+1. **Install Git Bash (Recommended)**
+   - Download: https://git-scm.com/downloads
+   - Install dengan default settings
+   - Gunakan Git Bash terminal
+   - Jalankan command seperti Linux/Mac
+
+2. **Gunakan PowerShell Installer**
+   ```powershell
+   # Download dan jalankan installer PowerShell
+   Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/irvandoda/dockerin/main/install.ps1' -OutFile install.ps1
+   .\install.ps1
+   ```
+
+3. **Gunakan Command Alternatif**
+   ```powershell
+   # Install
+   curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh | bash
+   
+   # Run menu
+   curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/menu.sh | bash
+   ```
+
+4. **Install WSL2**
+   ```powershell
+   # Install WSL2
+   wsl --install
+   
+   # Setelah install, gunakan WSL terminal
+   wsl
+   
+   # Kemudian jalankan command seperti Linux
+   bash <(curl -s https://raw.githubusercontent.com/irvandoda/dockerin/main/install.sh)
+   ```
+
+### Requirements untuk Windows
+
+- **Git Bash** atau **WSL2** (required untuk menjalankan bash scripts)
+- **PowerShell 5.1+** (untuk installer PowerShell)
+- **Docker Desktop for Windows** (untuk menjalankan containers)
 
 ---
 
